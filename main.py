@@ -45,10 +45,6 @@ class LangAgent:
         self.agent = self._create_agent_flow()
         
     def get_tools_for_state(self, state: dict):
-        """
-        Memilih tools berdasarkan kondisi tertentu di state.
-        Misal: state['tool_mode'] = "calculator_only"
-        """
         tool_mode = state.get("tool_mode", "all")
         if tool_mode == "calculator_only":
             return [t for t in self._all_tools if t.name == "calculator"]
