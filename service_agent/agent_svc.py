@@ -32,6 +32,7 @@ async def ask_agent(request: MessageRequest):
     try:
         # inisialisasi agent per request
         agent_instance = LangAgent(api_key=request.api_key)
+        await agent_instance.init_tools()
 
         # konversi list of string -> HumanMessage/AIMessage
         messages = []

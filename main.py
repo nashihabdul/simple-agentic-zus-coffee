@@ -35,8 +35,8 @@ class LangAgent:
                 "calculator": {"transport": "sse", "url": "https://mcp-tools-production-6365.up.railway.app/sse"},
             }
         )
-        self._all_tools = asyncio.run(self.client.get_tools())
-        logger.success(f"All tools loaded: {', '.join(tool.name for tool in self._all_tools)}")
+        # self._all_tools = asyncio.run(self.client.get_tools())
+        # logger.success(f"All tools loaded: {', '.join(tool.name for tool in self._all_tools)}")
 
         self.chain = self._create_assistant_chain()
         self.agent = self._create_agent_flow()
@@ -44,6 +44,9 @@ class LangAgent:
     # -----------------------------
     # SELECT TOOLS
     # -----------------------------
+    async def init_tools(self):
+        self._all_tools = await self.client.get_tools()
+        
     def get_tools_for_state(self, state: dict):
         """
         Memilih tools berdasarkan kondisi tertentu di state.
