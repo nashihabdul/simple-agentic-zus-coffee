@@ -8,7 +8,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from main import LangAgent  # import LangAgent dari main.py
+from main import LangAgent
 
 # -----------------------------
 # FastAPI app
