@@ -19,7 +19,7 @@ class LangAgent:
     class AgentState(TypedDict, total=False):
         messages: Annotated[list[AnyMessage], add_messages]
         intention: str
-        tool_mode: str  # opsional, bisa pakai kondisi ini untuk memilih tools
+        tool_mode: str 
 
     def __init__(self, api_key: str):
         logger.info("Initialize LLM...")
@@ -35,8 +35,6 @@ class LangAgent:
                 "calculator": {"transport": "sse", "url": "https://mcp-tools-production-6365.up.railway.app/sse"},
             }
         )
-        # self._all_tools = asyncio.run(self.client.get_tools())
-        # logger.success(f"All tools loaded: {', '.join(tool.name for tool in self._all_tools)}")
 
     # -----------------------------
     # SELECT TOOLS
@@ -57,7 +55,6 @@ class LangAgent:
         elif tool_mode == "drinkware_only":
             return [t for t in self._all_tools if t.name in ["drinkware_catalogue"]]
         else:
-            # default: semua tools
             return self._all_tools
 
     # -----------------------------

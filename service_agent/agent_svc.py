@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 import time
@@ -12,12 +13,24 @@ from main import LangAgent
 
 app = FastAPI()
 
+origins = [
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,          
+    allow_credentials=True,
+    allow_methods=["*"],            
+    allow_headers=["*"],          
+)
+
 # -----------------------------
 # Request model
 # -----------------------------
 class MessageRequest(BaseModel):
     messages: List[str]   # list of strings, alternates Human/AI
-    api_key: str          # api_key llm
+    api_key: str          # api_key untuk init agent per request
 
 # -----------------------------
 # Ask endpoint
@@ -30,11 +43,10 @@ async def ask_agent(request: MessageRequest):
         raise HTTPException(status_code=400, detail="API key is required")
 
     try:
-        # init agent
+        # inisialisasi agent per request
         agent_instance = LangAgent(api_key=request.api_key)
-        await agent_instance.init_tools()
 
-        # convert list to ObjectMessage -> HumanMessage/AIMessage
+        # konversi list of string -> HumanMessage/AIMessage
         messages = []
         for i, msg in enumerate(request.messages):
             if i % 2 == 0:
@@ -42,7 +54,7 @@ async def ask_agent(request: MessageRequest):
             else:
                 messages.append(AIMessage(content=msg))
 
-        # Ainvoke Agent
+        # jalankan agent
         result = await agent_instance.ainvoke({"messages": messages})
         answer = result["messages"][-1].content if result["messages"] else ""
 
