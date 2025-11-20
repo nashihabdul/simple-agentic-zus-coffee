@@ -38,14 +38,13 @@ class LangAgent:
         # self._all_tools = asyncio.run(self.client.get_tools())
         # logger.success(f"All tools loaded: {', '.join(tool.name for tool in self._all_tools)}")
 
-        self.chain = self._create_assistant_chain()
-        self.agent = self._create_agent_flow()
-
     # -----------------------------
     # SELECT TOOLS
     # -----------------------------
     async def init_tools(self):
         self._all_tools = await self.client.get_tools()
+        self.chain = self._create_assistant_chain()
+        self.agent = self._create_agent_flow()
         
     def get_tools_for_state(self, state: dict):
         """

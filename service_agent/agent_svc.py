@@ -17,7 +17,7 @@ app = FastAPI()
 # -----------------------------
 class MessageRequest(BaseModel):
     messages: List[str]   # list of strings, alternates Human/AI
-    api_key: str          # api_key untuk init agent per request
+    api_key: str          # api_key llm
 
 # -----------------------------
 # Ask endpoint
@@ -30,11 +30,11 @@ async def ask_agent(request: MessageRequest):
         raise HTTPException(status_code=400, detail="API key is required")
 
     try:
-        # inisialisasi agent per request
+        # init agent
         agent_instance = LangAgent(api_key=request.api_key)
         await agent_instance.init_tools()
 
-        # konversi list of string -> HumanMessage/AIMessage
+        # convert list to ObjectMessage -> HumanMessage/AIMessage
         messages = []
         for i, msg in enumerate(request.messages):
             if i % 2 == 0:
@@ -42,7 +42,7 @@ async def ask_agent(request: MessageRequest):
             else:
                 messages.append(AIMessage(content=msg))
 
-        # jalankan agent
+        # Ainvoke Agent
         result = await agent_instance.ainvoke({"messages": messages})
         answer = result["messages"][-1].content if result["messages"] else ""
 
