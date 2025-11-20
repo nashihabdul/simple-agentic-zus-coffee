@@ -1,1 +1,1 @@
-web: uvicorn main:app --reload --host 0.0.0.0 --port 3535
+web: uvicorn service_agent.agent_svc:app --reload --host 0.0.0.0 --port 3535
