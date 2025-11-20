@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=0.1">
+        <title>MINDHIVE ASSESSMENT</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <div class="app-wrapper">
+            <button id="toggleSidebarBtn">Detail Step</button>
+            
+            <!-- Container Visualization -->
+            <div class="visualization-box">
+                <button class="close-sidebar-btn">×</button>
+                <h2 class="section-title">How I can achieve this answer.</h2>
+                <div class="container-item">
+                    
+                </div>
+            </div>
+
+            <!-- Container Chat -->
+            <div class="container">
+                <!-- App Header -->
+                <header class="app-header">
+                    <h1 class="heading">Welcome to ZUS Coffee Agent</h1>
+                    <h2 class="sub-heading">How can I help you?</h2>
+                </header>
+
+                <!-- Suggestion List -->
+                <ul class="suggestions">
+                    <li class="suggestions-item">
+                        <p class="text">
+                            What is 209123 multiply by 23 divide by 987?
+                        </p>
+                    </li>
+                    <li class="suggestions-item">
+                        <p class="text">
+                            I want to buy All Day Cups at the outlets. Is that possible?
+                        </p>
+                    </li>
+                    <li class="suggestions-item">
+                        <p class="text">
+                            It's still 7 am. Show outlets in Damansara, I need to open my laptop now.
+                        </p>
+                        <!-- <span class="material-symbols-rounded">strategy</span> -->
+                    </li>
+                </ul>
+
+                <!-- Chats Container -->
+                <div class="chats-container">
+                    <div class="chat-header">
+                        <h3 class="chat-title" style="display: none;">
+                        ZUS Coffee Agent
+                        </h3>
+                    </div>
+                    <div id="chats"></div>
+                </div>
+
+                <!-- Propmt Container -->
+                <div class="prompt-container">
+                    <div class="prompt-wrapper">
+                        <form action="#" class="prompt-form">
+                            <input type="text" placeholder="Ask Something" class="prompt-input" required>
+                            <div class="prompt-actions">
+                                <!-- File Upload Wrapper -->
+                                <div class="file-upload-wrapper">
+                                    <img src="#" class="file-preview">
+                                    <input type="file" accept="image/*, .pdf, .txt, .csv" id="file-input" hidden>
+                                    <button type="button" class="file-icon material-symbols-rounded">description</button>
+                                    <button id="add-file-btn" type="button" class="material-symbols-rounded">attach_file</button>
+                                    <button id="cancel-file-btn" type="button" class="material-symbols-rounded">close</button>
+                                </div>
+                                <button type="button" id="stop-response-btn" class="material-symbols-rounded">stop_circle</button>
+                                <button id="send-prompt-btn" class="material-symbols-rounded">arrow_upward</button>
+                            </div>
+                        </form>
+
+                        <button id="theme-toggle-btn" class="material-symbols-rounded">light_mode</button>
+                        <button id="delete-chats-btn" class="material-symbols-rounded">delete</button>
+                    </div>
+
+                    <p class="disclaimer-text">AI can make mistake. Please double check.</p>
+                </div>
+            </div>
+        </div>
+
+        <script src="./script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    </body>
+</html>
